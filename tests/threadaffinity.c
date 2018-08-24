@@ -5,6 +5,15 @@
 #include <stdio.h>
 #include "threadaffinity.h"
 
+/** 
+  pthread_getaffinity_np 与DPDK关系
+  1 DPDK 的各core直接是分core 运行的
+  2 以 -l 3-5 传递命令行参数运行的，在 rte_eal_mp_remote_launch 之后，获得的 core mask 分别为 3,4,5
+    并不是 4,5， core3在代码中标记为 MASTER 还是运行了的
+  3 运行的 rte_eal_mp_remote_launch(,, SKIP_MASTER) 还是 rte_eal_mp_remote_launch(,,CALL_MASTER) 
+    都会被重新set affinity
+*/
+
 #ifdef WIN32
 
 #include <windows.h>
