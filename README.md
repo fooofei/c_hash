@@ -51,3 +51,12 @@
 
 3 二次探测法对无锁是否友好？
 
+另一个 hash key 计算方式
+
+    static inline unsigned hashkey(unsigned int dest_ip) 
+　　{ 
+　　  return (dest_ip* 2654435761UL) & HASH_TAB_MASK; 
+　　} 
+　　其中，2654435761UL是2到2^32 (4294967296)间接近于黄金分割的素数， 
+　　(sqrt(5) - 1) / 2 = 0.618033989 
+　　2654435761 / 4294967296 = 0.618033987
