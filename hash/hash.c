@@ -2,12 +2,28 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <errno.h>
+#ifdef __linux__
 #include <asm-generic/errno-base.h> // EINVAL ENOMEM
-
-#include <rte_rwlock.h>
+#endif
+//#include <rte_rwlock.h>
 
 #include "hash.h"
-#include "stringer.h"
+//#include "stringer.h"
+
+//
+//
+// fake defines
+struct rte_rwlock{
+    int cnt;
+};
+typedef struct rte_rwlock rte_rwlock_t;
+
+static inline void rte_rwlock_init(rte_rwlock_t * arg0){
+    (void)arg0;
+}
+//
+//
+//
 
 struct entry {
     void * next;
@@ -28,16 +44,16 @@ struct hash{
 typedef unsigned long long uint64;
 
 static inline void __read_lock_entry(struct entry * e){
-    rte_rwlock_read_lock(&e->lock);
+    //rte_rwlock_read_lock(&e->lock);
 }
 static inline void __read_unlock_entry(struct entry * e){
-    rte_rwlock_read_unlock(&e->lock);
+    //rte_rwlock_read_unlock(&e->lock);
 }
 static inline void __write_lock_entry(struct entry * e){
-    rte_rwlock_write_lock(&e->lock);
+    //rte_rwlock_write_lock(&e->lock);
 }
 static inline void __write_unlock_entry(struct entry * e){
-    rte_rwlock_write_unlock(&e->lock);
+    //rte_rwlock_write_unlock(&e->lock);
 }
 static inline void  ** hash_list_next_ptr(struct hash * hash, void * item){
     return (void **)((uintptr_t)item + hash->next_off);
@@ -137,9 +153,7 @@ int hash_add(struct hash * hash, void * key, void * item){
     if(!(hash && key && item)){
         return -1;
     }
-    
     __hash_find(hash, key, &entry, &entry_item);
-
     if(entry_item && *entry_item){
         // found
         return -2;
@@ -258,7 +272,6 @@ void * hash_iterator_get(struct hash_iterator * hash_iter, void ** key, void ** 
         }
     }
     return NULL;
-
 }
 void hash_iterator_end(struct hash_iterator * hash_iter){
     if(!(hash_iter && hash_iter->hash)){

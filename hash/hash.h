@@ -1,5 +1,10 @@
-#ifndef _HASH_HEADER
-#define _HASH_HEADER
+/**
+ *  A less malloc hash table.
+ *  Not support hash table resize at running.
+ * 
+ */
+#pragma once
+
 
 #include <string.h>
 #include <stdlib.h>
@@ -10,6 +15,11 @@
 
 struct hash;
 struct stringer;
+
+static inline void stringer_printf(struct stringer * arg0, const char * fmt, ...){
+    (void)arg0;
+    (void)fmt;
+}
 
 #ifndef offset_of
 #define offset_of(str, member)	((char *)(&((str *)0)->member) - (char *)0)
@@ -29,7 +39,7 @@ uint64_t BKDRHash(void* key);
 uint32_t hash_items_count(struct hash * hash);
 uint32_t hash_size(struct hash * hash);
 void hash_stat(struct hash * hash, struct stringer * string, const char * name);
-void hash_stat_brief(struct hash * hash, struct  stringer * sb);
+void hash_stat_brief(struct hash * hash, struct  stringer * string);
 
 
 struct hash_iterator {
@@ -43,5 +53,4 @@ void hash_iterator_set(struct hash_iterator * , struct hash *);
 void * hash_iterator_get(struct hash_iterator *, void ** key, void ** data);
 void hash_iterator_end(struct hash_iterator *);
 
-#endif 
 

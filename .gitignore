@@ -1,1 +1,3 @@
 tests/.vs/
+tests/.build
+hash/.build

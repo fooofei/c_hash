@@ -13,7 +13,6 @@ set(self_binary_name testhash)
 
 set(Source_files 
 	${CMAKE_CURRENT_LIST_DIR}/main.c
-	${CMAKE_CURRENT_LIST_DIR}/threadaffinity.c
 	${CMAKE_CURRENT_LIST_DIR}/threadaffinity.h
 	${CMAKE_CURRENT_LIST_DIR}/../xhash/xhash.h
 	${CMAKE_CURRENT_LIST_DIR}/../xhash/xhash.c

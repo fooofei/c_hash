@@ -1,5 +1,6 @@
 
-#include <mcheck.h>
+
+//#include <mcheck.h>
 #include <stdio.h>
 #include <string.h>
 #include <signal.h>
@@ -13,7 +14,6 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <assert.h>
-#include <sys/epoll.h>
 #include <limits.h>
 
 
@@ -63,6 +63,7 @@ struct hash_item * item_new(uint32_t i) {
     item->key.key1 = 2 * i;
     item->key.key2 = 2 * i + 1;
     item->data = i;
+    return item;
 }
 
 void test_hash_basic() {
@@ -135,10 +136,9 @@ void test_hash_basic() {
 
 }
 
-int main1(){
-    mtrace();
+int main(){
+    //mtrace();
     test_hash_basic();
-
 
     return 0;
 }

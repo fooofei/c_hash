@@ -6,8 +6,8 @@
 
 struct xhash;
 
-int xhash_ctor(struct xhash ** h);
+struct xhash *  xhash_ctor(uint32_t size);
 int xhash_add(struct xhash * h, uint64_t key, void * data);
-bool xhash_exists(struct xhash * h, uint64_t key);
+void * xhash_search(struct xhash * h, uint64_t key);
 void xhash_delete(struct xhash * h, uint64_t key);
-void xhash_dtor(struct xhash ** h);
+void xhash_dtor(struct xhash * h);

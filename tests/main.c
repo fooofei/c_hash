@@ -1,3 +1,6 @@
+/**
+ *  use threadaffinity to test hash table concurrency 
+ */
 #include <stdio.h>
 
 #include "threadaffinity.h"
