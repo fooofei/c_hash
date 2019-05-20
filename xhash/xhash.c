@@ -3,6 +3,11 @@
 #include "xhash.h"
 #include "murmur3.h"
 
+/**
+ * http://www.memoryhole.net/kyle/2011/06/02/lf_hash.c
+ * 
+ * /
+
 /** 
  * |---------------|-----|----------|----------|---------------|
  *                        
