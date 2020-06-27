@@ -165,7 +165,7 @@ int xhash_add(struct xhash* hash, uint64_t key, void* data)
         key_clear_rd_cnt(&expect);
         uint64_t new_ = expect;
     } while (atomic_cmp_set(&(hash->entry[idx].key), expect, new_));
-
+    
     index = key % h->capacity;
     en = &h->entry[index];
     en->key = key;
